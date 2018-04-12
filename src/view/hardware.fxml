@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="center" hgap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="10" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+    <children>
+        <Label fx:id="lblTitel" text="Raumverwatung" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="0">
+            <font>
+                <Font name="System Bold Italic" size="19.0" />
+            </font></Label>
+        <Label fx:id="lblRaumId" text="RaumId" GridPane.rowIndex="1" />
+        <Label fx:id="lblTyp" text="Typ" GridPane.rowIndex="3" />
+        <Label fx:id="lblSeriennummer" text="Seriennummer" GridPane.rowIndex="4" />
+        <Label fx:id="lblInventarnummer" text="Inventarnummer" GridPane.rowIndex="5" />
+        <Label fx:id="lblHersteller" text="Hersteller" GridPane.rowIndex="6" />
+        <Label fx:id="lblModell" text="Modell" GridPane.rowIndex="7" />
+        <TextField fx:id="txtRaumId" promptText="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="txtType" promptText="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextField fx:id="txtSeriennummer" promptText="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField fx:id="txtInventarnummer" promptText="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <TextField fx:id="txtHersteller" promptText="" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <TextField fx:id="txtModell" promptText="" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <ListView fx:id="listView" prefHeight="101.0" prefWidth="247.0" GridPane.columnSpan="2" GridPane.rowIndex="12" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="80.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+            <children>
+                <Button fx:id="btnHinzufuegen" layoutY="2.0" mnemonicParsing="false" onAction="#writeToDb" text="Neu" />
+                <!--<Button fx:id="btnAendern" layoutX="87.0" layoutY="2.0" mnemonicParsing="false" text="Aendern" />-->
+            </children>
+        </AnchorPane>
+        <Button fx:id="btnEnde" layoutY="2.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="84.0" text="Ende" GridPane.rowIndex="11" GridPane.valignment="TOP" />
+      <RadioButton fx:id="rbDrucker" mnemonicParsing="false" onAction="#toggleRadiobuttonHardware" text="Drucker" GridPane.rowIndex="2">
+         <toggleGroup>
+            <ToggleGroup fx:id="Hardware" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rbRechner" mnemonicParsing="false" onAction="#toggleRadiobuttonHardware" selected="true" text="Rechner" toggleGroup="$Hardware" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label text="Imagepfad" GridPane.rowIndex="8" />
+      <TextField fx:id="txtImagepfad" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <TextField fx:id="txtBetriebsmittel" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <Label text="Betriebsmittel" GridPane.rowIndex="9" />
+      <Label text="Status" GridPane.rowIndex="10" />
+      <TextField fx:id="txtStatus" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+    </children>
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+    </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>
