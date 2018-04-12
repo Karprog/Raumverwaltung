@@ -1,8 +1,6 @@
 package controller;
 
-import model.Drucker;
 import model.Hardware;
-import model.Raum;
 import model.Rechner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,5 +1,10 @@
 package model;
+
+/**
+ * Created by pfleiderer.stefanie on 17.11.2017.
+ */
 public class Hardware {
+
     private int id;
     private String typ;
     private String seriennummer;
@@ -7,29 +12,25 @@ public class Hardware {
     private String hersteller;
     private String modell;
     private int status;
+    private String raumid;
 
-    public Hardware(String typ) {
+    public Hardware(
+                    String typ,
+                    String seriennummer,
+                    String inventarnummer,
+                    String hersteller,
+                    String modell,
+                    int status, String raumid) {
         this.typ = typ;
+        this.seriennummer = seriennummer;
+        this.inventarnummer = inventarnummer;
+        this.hersteller = hersteller;
+        this.modell = modell;
+        this.status = status;
+        this.raumid = raumid;
     }
 
-    @Override
-    public String toString() {
-        return "\n" +
-                "Hardware{" +
-                "id=" + id +
-                ", typ='" + typ + '\'' +
-                ", seriennummer='" + seriennummer + '\'' +
-                ", inventarnummer='" + inventarnummer + '\'' +
-                ", hersteller='" + hersteller + '\'' +
-                ", modell='" + modell + '\'' +
-                ", status=" + status +
-                '}';
-    }
-
-    public void wechsleRaum(Raum raum) {
-
-    }
-
+    public Hardware() {};
 
     public int getId() {
         return id;
@@ -85,5 +86,23 @@ public class Hardware {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "\n" +
+                "Hardware{" +
+                "id=" + id +
+                ", typ='" + typ + '\'' +
+                ", seriennummer='" + seriennummer + '\'' +
+                ", inventarnummer='" + inventarnummer + '\'' +
+                ", hersteller='" + hersteller + '\'' +
+                ", modell='" + modell + '\'' +
+                ", status=" + status +
+                '}';
+    }
+
+    public void wechsleRaum(Raum raum) {
+        raum.addToHardwareList(this);
     }
 }

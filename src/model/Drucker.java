@@ -1,17 +1,30 @@
 package model;
 
 /**
- * Created by joel_thinkpad on 17.11.2017.
+ * Created by pfleiderer.stefanie on 17.11.2017.
  */
 public class Drucker extends Hardware {
+
     private String betriebsmittel;
 
-    public Drucker() {
-        super("Drucker");
+    public Drucker(
+                   String typ,
+                   String seriennummer,
+                   String inventarnummer,
+                   String hersteller,
+                   String modell,
+                   int status,
+                   String betriebsmittel, String raumid) {
+        super(typ, seriennummer, inventarnummer, hersteller, modell, status, raumid);
+        this.betriebsmittel = betriebsmittel;
+    }
+
+    public String getBetriebsmittel() {
+        return this.betriebsmittel;
     }
 
     public void wechsleBetriebsmittel() {
-        System.out.println(betriebsmittel + " muss erneuert werden.");
+        System.out.println(this.betriebsmittel + " muss erneuert werden.\n");
     }
 
     @Override
@@ -19,13 +32,5 @@ public class Drucker extends Hardware {
         return super.toString() +  "Drucker{" +
                 "betriebsmittel='" + betriebsmittel + '\'' +
                 '}';
-    }
-
-    public String getBetriebsmittel() {
-        return betriebsmittel;
-    }
-
-    public void setBetriebsmittel(String betriebsmittel) {
-        this.betriebsmittel = betriebsmittel;
     }
 }
