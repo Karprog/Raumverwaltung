@@ -126,7 +126,7 @@ public class Controller implements Initializable {
         hardwareList.add(rechner);
         hardwareList.add(rechner);
         hardwareList.add(rechner);
-        raum.setHardwareArrayList(hardwareList);
+        raum.setHardwareliste(hardwareList);
         raumList.add(raum);
         raumList.add(raum);
     }
