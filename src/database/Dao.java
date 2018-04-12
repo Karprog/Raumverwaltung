@@ -1,5 +1,10 @@
 package database;
 
+import model.Drucker;
+import model.Hardware;
+import model.Raum;
+import model.Rechner;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
