@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-class Dao {
+public class Dao {
 
     private DaoManager daoManager = new DaoManager(
             "com.mysql.jdbc.driver",
@@ -70,7 +70,7 @@ class Dao {
         return hardwareList;
     }
 
-    void saveHardware(Hardware hardware) {
+    public void saveHardware(Hardware hardware) {
         String sql = "INSERT INTO hardware (" +
                 "typ, seriennummer, inventarnummer, hersteler, modell, status)" +
                 "VALUES (?, ?, ?, ?, ?, ?);";
@@ -125,7 +125,7 @@ class Dao {
         preparedStatement.executeUpdate();
     }
 
-    void saveRaum(Raum raum) {
+    public void saveRaum(Raum raum) {
         String sql = "INSERT INTO raum (bezeichnung, typ, anzahl_arbeitsplaetze) VALUES (?, ?, ?);";
         try {
             connection.prepareStatement(sql);

@@ -7,6 +7,8 @@ public class Rechner extends Hardware {
 
     private String imagepfad;
 
+    public Rechner(){ }
+
     public Rechner(
 
                    String typ,
@@ -21,6 +23,10 @@ public class Rechner extends Hardware {
 
     public String getImagepfad() {
         return this.imagepfad;
+    }
+
+    public void setImagepfad(String imagepfad) {
+        this.imagepfad = imagepfad;
     }
 
     public void neuesImage(String pfad) {

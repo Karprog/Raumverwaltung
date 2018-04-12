@@ -7,6 +7,8 @@ public class Drucker extends Hardware {
 
     private String betriebsmittel;
 
+    public Drucker(){ }
+
     public Drucker(
                    String typ,
                    String seriennummer,
@@ -21,6 +23,10 @@ public class Drucker extends Hardware {
 
     public String getBetriebsmittel() {
         return this.betriebsmittel;
+    }
+
+    public void setBetriebsmittel(String betriebsmittel) {
+        this.betriebsmittel = betriebsmittel;
     }
 
     public void wechsleBetriebsmittel() {

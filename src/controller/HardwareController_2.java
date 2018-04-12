@@ -1,13 +1,16 @@
 package controller;
 
+import database.Dao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import model.Drucker;
+import model.Rechner;
 
-public class HardwareController extends Controller {
+public class HardwareController_2 extends Controller {
 
     @FXML
     private TextField txtRaumId;

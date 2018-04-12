@@ -1,6 +1,8 @@
 package controller;
 
+import model.Drucker;
 import model.Hardware;
+import model.Raum;
 import model.Rechner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -124,7 +126,7 @@ public class Controller implements Initializable {
         hardwareList.add(rechner);
         hardwareList.add(rechner);
         hardwareList.add(rechner);
-        raum.setHardwareArrayList(hardwareList);
+        raum.setHardwareliste(hardwareList);
         raumList.add(raum);
         raumList.add(raum);
     }

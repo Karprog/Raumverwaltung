@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-abstract class Controller {
+abstract class Controller_2 {
 
     @FXML
     private Button btnEnde;

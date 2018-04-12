@@ -12,6 +12,8 @@ public class Raum {
     private int anzahlArbeitsplaetze;
     private ArrayList<Hardware> hardwareliste = new ArrayList<>();
 
+    public Raum(){ }
+
     public Raum(
                 String bezeichnung,
                 String typ,
@@ -19,6 +21,14 @@ public class Raum {
         this.bezeichnung = bezeichnung;
         this.typ = typ;
         this.anzahlArbeitsplaetze = anzahlArbeitsplaetze;
+    }
+
+    public int getRaumid() {
+        return raumid;
+    }
+
+    public void setRaumid(int raumid) {
+        this.raumid = raumid;
     }
 
     public String getBezeichnung() {
@@ -35,6 +45,10 @@ public class Raum {
 
     public ArrayList<Hardware> getHardwareliste() {
         return this.hardwareliste;
+    }
+
+    public void setHardwareliste(ArrayList<Hardware> hardwareliste) {
+        this.hardwareliste = hardwareliste;
     }
 
     public void addToHardwareList(Hardware hardware) {
