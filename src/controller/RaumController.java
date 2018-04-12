@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import model.Raum;
 
 
-public class RaumController_2 extends Controller {
+public class RaumController extends HardwareController {
 
     @FXML
     private TextField txtBezeichnung;
