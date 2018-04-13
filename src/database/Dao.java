@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Dao {
 
     private DaoManager daoManager = new DaoManager(
-            "com.mysql.jdbc.driver",
+            "com.mysql.jdbc.Driver",
             "jdbc:mysql://localhost/reparatur "
     );
     private PreparedStatement preparedStatement;
