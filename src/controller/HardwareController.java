@@ -47,6 +47,7 @@ public class HardwareController implements Initializable {
     private RadioButton rbRechner;
 
     private ObservableList<Raum> raumList = FXCollections.observableArrayList();
+    private Dao reparaturDao = new Dao();
     private boolean isRechner = false;
 
     @Override
@@ -146,10 +147,6 @@ public class HardwareController implements Initializable {
             isRechner = false;
         }
     }
-
-
-
-    private Dao reparaturDao = new Dao();
 
     @FXML
     void handleBtnSaveAction(ActionEvent e) {
