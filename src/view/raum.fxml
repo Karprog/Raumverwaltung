@@ -29,7 +29,7 @@
                 <!--<Button fx:id="btnAendern" layoutX="87.0" layoutY="2.0" mnemonicParsing="false" text="Aendern" />-->
             </children>
         </AnchorPane>
-        <Button fx:id="btnEnde" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Ende" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+        <Button fx:id="btnEnde" layoutY="2.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="84.0" text="Ende" GridPane.rowIndex="4" GridPane.valignment="TOP" />
     </children>
     <columnConstraints>
         <ColumnConstraints />

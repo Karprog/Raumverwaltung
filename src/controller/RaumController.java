@@ -26,6 +26,8 @@ public class RaumController implements Initializable {
     @FXML
     private Button btnSave;
     @FXML
+    private Button btnEnde;
+    @FXML
     private ListView<Raum> listView;
 
     private ObservableList<Raum> raumList = FXCollections.observableArrayList();
@@ -77,5 +79,6 @@ public class RaumController implements Initializable {
     @FXML
     private void closeWindow(){
         System.exit(0);
+        System.out.println(getRaumDataFromView());
     }
 }
