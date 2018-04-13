@@ -2,6 +2,7 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
+.idea/*
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
@@ -48,3 +49,9 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+
+
+
+Raumverwaltung.iml
+.DS_Store
+src/.DS_Store
