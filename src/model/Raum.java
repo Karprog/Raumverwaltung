@@ -35,12 +35,24 @@ public class Raum {
         return bezeichnung;
     }
 
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
+    }
+
     public String getTyp() {
         return typ;
     }
 
+    public void setTyp(String typ) {
+        this.typ = typ;
+    }
+
     public int getAnzahlArbeitsplaetze() {
         return anzahlArbeitsplaetze;
+    }
+
+    public void setAnzahlArbeitsplaetze(int anzahlArbeitsplaetze) {
+        this.anzahlArbeitsplaetze = anzahlArbeitsplaetze;
     }
 
     public ArrayList<Hardware> getHardwareliste() {
