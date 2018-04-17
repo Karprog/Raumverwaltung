@@ -62,21 +62,27 @@ public class HardwareController implements Initializable {
     }
 
     @FXML
-    private void writeToDb(){ }
-
-    private void readFromDb(){ }
-
-    private void writeDataToList(int raumId, Hardware hardware){
-        for(Raum raum :raumList) {
-            if (raum.getRaumid() == raumId) {
-                raum.addToHardwareList(hardware);
-            }
-        }
-
-        listView.refresh();
+    private void writeToDb(){
+     //   System.out.println(getDataFromView());
     }
 
-    /*private Hardware getHardwareDataFromView(){
+    private void readFromDb(){
+
+    }
+
+    private void writeDataToView(){
+        /*txtHardwareId.setText();
+        txtHersteller.setText();
+        txtModell.setText();
+        txtSeriennummer.setText();
+        txtInventarnummer.setText();
+        txtType.setText();
+        txtStatus.setText();
+        txtImagepfad.setText();
+        txtBetriebsmittel.setText();*/
+    }
+
+    private Hardware getHardwareDataFromView(){
         if(isRechner){
             Rechner rechner = new Rechner();
             rechner.setHersteller(txtHersteller.getText());
@@ -101,7 +107,15 @@ public class HardwareController implements Initializable {
             drucker.setBetriebsmittel(txtBetriebsmittel.getText());
             return  drucker;
         }
-    }*/
+    }
+
+
+    private Raum getRaumDataFromView() {
+        /*Raum raum = new Raum();
+        raum.*/
+
+        return null;
+    }
 
     private void fillList() {
         // Werte zum testen
@@ -113,7 +127,10 @@ public class HardwareController implements Initializable {
         raum.setRaumid(123);
         ArrayList<Hardware> hardwareList = new ArrayList<>();
         hardwareList.add(rechner);
+        hardwareList.add(rechner);
+        hardwareList.add(rechner);
         raum.setHardwareliste(hardwareList);
+        raumList.add(raum);
         raumList.add(raum);
     }
 
@@ -148,16 +165,12 @@ public class HardwareController implements Initializable {
             Rechner rechner = new Rechner(typ, seriennummer, inventarnummer,
                     hersteller, modell, status, imagepfad, raumid);
             reparaturDao.saveHardware(rechner);
-
-            writeDataToList(Integer.parseInt(raumid), rechner);
         }
         if (!"".equals(druckerInstance)) {
             String betriebsmittel = txtBetriebsmittel.getText();
             Drucker drucker = new Drucker(typ, seriennummer, inventarnummer, hersteller, modell, status,
                     betriebsmittel, raumid);
             reparaturDao.saveHardware(drucker);
-
-            writeDataToList(Integer.parseInt(raumid), drucker);
         }
     }
 

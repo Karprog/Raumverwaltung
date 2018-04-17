@@ -9,7 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import model.Hardware;
 import model.Raum;
 
 import java.net.URL;
@@ -36,8 +35,7 @@ public class RaumController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        listView.setItems(raumList);
-        listView.refresh();
+
     }
 
     private Raum getRaumDataFromView(){
@@ -49,16 +47,26 @@ public class RaumController implements Initializable {
     }
 
     @FXML
-    private void writeToDb(){ }
-
-    private void readFromDb(){ }
-
-    private void writeDataToList(Raum raum){
-        raumList.add(raum);
-        listView.refresh();
+    private void writeToDb(){
+        //   System.out.println(getDataFromView());
     }
 
-    @FXML
+    private void readFromDb(){
+
+    }
+
+    private void writeDataToView(){
+        /*txtHardwareId.setText();
+        txtHersteller.setText();
+        txtModell.setText();
+        txtSeriennummer.setText();
+        txtInventarnummer.setText();
+        txtType.setText();
+        txtStatus.setText();
+        txtImagepfad.setText();
+        txtBetriebsmittel.setText();*/
+    }
+
     void handleBtnSaveAction(ActionEvent e) {
         String bezeichnung = txtBezeichnung.getText();
         String typ = txtTyp.getText();
@@ -66,11 +74,11 @@ public class RaumController implements Initializable {
 
         Raum raum = new Raum(bezeichnung, typ, anzahlArbeitsplaetze);
         dao.saveRaum(raum);
-        writeDataToList(raum);
     }
 
     @FXML
     private void closeWindow(){
         System.exit(0);
+        System.out.println(getRaumDataFromView());
     }
 }
