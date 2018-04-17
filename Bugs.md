@@ -1,7 +1,7 @@
 ## Bugs:
 
-- Headline abgeschnitten
-- Button direkt an Fenster-Rand
+- ~~Headline abgeschnitten~~
+- ~~Button direkt an Fenster-Rand~~
 - Hardware anlegen
   - Fenster zu schmal und zu kurz für Liste
   - Hinzugügen von Drucker geht nicht
