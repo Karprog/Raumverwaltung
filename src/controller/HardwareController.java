@@ -70,51 +70,14 @@ public class HardwareController implements Initializable {
 
     }
 
-    private void writeDataToView(){
-        /*txtHardwareId.setText();
-        txtHersteller.setText();
-        txtModell.setText();
-        txtSeriennummer.setText();
-        txtInventarnummer.setText();
-        txtType.setText();
-        txtStatus.setText();
-        txtImagepfad.setText();
-        txtBetriebsmittel.setText();*/
-    }
-
-    private Hardware getHardwareDataFromView(){
-        if(isRechner){
-            Rechner rechner = new Rechner();
-            rechner.setHersteller(txtHersteller.getText());
-            rechner.setId(Integer.parseInt(txtHardwareId.getText()));
-            rechner.setInventarnummer(txtInventarnummer.getText());
-            rechner.setSeriennummer(txtSeriennummer.getText());
-            rechner.setModell(txtModell.getText());
-            rechner.setTyp(txtTyp.getText());
-            rechner.setStatus(Integer.parseInt(txtStatus.getText()));
-            rechner.setImagepfad(txtImagepfad.getText());
-            return  rechner;
+    private void writeDataToList(int raumId, Hardware hardware){
+        for(Raum raum : raumList){
+            if(raum.getRaumid() == raumId){
+                raum.getHardwareliste().add(hardware);
+            }
         }
-        else{
-            Drucker drucker = new Drucker();
-            drucker.setId(Integer.parseInt(txtHardwareId.getText()));
-            drucker.setHersteller(txtHersteller.getText());
-            drucker.setInventarnummer(txtInventarnummer.getText());
-            drucker.setSeriennummer(txtSeriennummer.getText());
-            drucker.setModell(txtModell.getText());
-            drucker.setTyp(txtTyp.getText());
-            drucker.setStatus(Integer.parseInt(txtStatus.getText()));
-            drucker.setBetriebsmittel(txtBetriebsmittel.getText());
-            return  drucker;
-        }
-    }
 
-
-    private Raum getRaumDataFromView() {
-        /*Raum raum = new Raum();
-        raum.*/
-
-        return null;
+        listView.refresh();
     }
 
     private void fillList() {
@@ -165,12 +128,16 @@ public class HardwareController implements Initializable {
             Rechner rechner = new Rechner(typ, seriennummer, inventarnummer,
                     hersteller, modell, status, imagepfad, raumid);
             reparaturDao.saveHardware(rechner);
+
+            writeDataToList(Integer.parseInt(raumid), rechner);
         }
         if (!"".equals(druckerInstance)) {
             String betriebsmittel = txtBetriebsmittel.getText();
             Drucker drucker = new Drucker(typ, seriennummer, inventarnummer, hersteller, modell, status,
                     betriebsmittel, raumid);
             reparaturDao.saveHardware(drucker);
+
+            writeDataToList(Integer.parseInt(raumid), drucker);
         }
     }
 
