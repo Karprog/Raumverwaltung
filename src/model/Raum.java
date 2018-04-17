@@ -1,12 +1,19 @@
 package model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.ArrayList;
 
 /**
  * Created by pfleiderer.stefanie on 17.11.2017.
  */
+@Entity
+@Table (name = "raum")
 public class Raum {
+    @Id
     private int raumid;
+
     private String bezeichnung;
     private String typ;
     private int anzahlArbeitsplaetze;

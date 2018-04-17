@@ -1,10 +1,17 @@
 package model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Created by pfleiderer.stefanie on 17.11.2017.
  */
+@Entity
+@Table(name = "hardware")
 public class Hardware {
 
+    @Id
     private int id;
     private String typ;
     private String seriennummer;
@@ -30,7 +37,7 @@ public class Hardware {
         this.raumid = raumid;
     }
 
-    public Hardware() {};
+    public Hardware() {}
 
     public int getId() {
         return id;

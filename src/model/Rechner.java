@@ -1,10 +1,18 @@
 package model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Created by pfleiderer.stefanie on 17.11.2017.
  */
+@Entity
+@Table (name = "rechner")
 public class Rechner extends Hardware {
 
+    @Id
+    private int id;
     private String imagepfad;
 
     public Rechner(){ }
