@@ -14,7 +14,7 @@
 
 <GridPane alignment="center" hgap="10" maxWidth="1.7976931348623157E308" vgap="10.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HardwareController">
     <children>
-        <Label fx:id="lblTitel" text="Raumverwaltung" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="0">
+        <Label fx:id="lblTitel" text="Hardware anlegen" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="0">
             <font>
                 <Font name="System Bold Italic" size="19.0" />
             </font></Label>
