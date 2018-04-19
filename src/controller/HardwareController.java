@@ -75,7 +75,8 @@ public class HardwareController implements Initializable {
     private void mapHardwareToRaum() {
         for ( Hardware hardware : hardwareList) {
             for ( Raum raum : raumList) {
-                if( hardware.getRaumid().equals(raum.getRaumid())) {
+                // Raum.Raumid und Hardware.Rumid müssen beide entweder Zahl oder String sein.
+                if( hardware.getRaumid().equals(raum.getRaumid() + "")) {
                     raum.getHardwareliste().add(hardware);
                 }
             }
