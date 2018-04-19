@@ -15,7 +15,7 @@ public class Dao {
 
     private DaoManager daoManager = new DaoManager(
             "com.mysql.jdbc.Driver",
-            "jdbc:mysql://127.0.0.1:3306/reparatur"
+            "jdbc:mysql://127.0.0.1:3306/reparatur?allowMultiQueries=true"
     );
     private PreparedStatement preparedStatement;
     private Connection connection = null;
@@ -26,9 +26,19 @@ public class Dao {
 
     public ArrayList getHardware() {
         ArrayList<Hardware> hardwareList = new ArrayList<>();
-        String sql = "SELECT * FROM hardware AS h INNER JOIN hardware_rechner AS hr ON h.id = hr.hardware_id" +
-                " UNION ALL " +
-                "SELECT * FROM hardware AS h INNER JOIN hardware_drucker AS hd ON h.id = hr.hardware_id;";
+        String sql = "SELECT h.*, r.imagepfad " +
+                "FROM hardware AS h " +
+                "INNER JOIN hardware_rechner AS hr " +
+                "ON h.id = hr.hardware_id " +
+                "INNER JOIN rechner AS r " +
+                "ON hr.rechner_id = r.id " +
+                " UNION " +
+                "SELECT h.*, d.betriebsmittel " +
+                "FROM hardware AS h " +
+                "INNER JOIN hardware_drucker AS hd " +
+                "ON h.id = hd.hardware_id " +
+                "INNER JOIN drucker AS d " +
+                "ON hd.drucker_id = d.id";
 
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -87,7 +97,7 @@ public class Dao {
                     resultSet.getInt("raumid"),
                     resultSet.getString("bezeichnung"),
                     resultSet.getString("typ"),
-                    resultSet.getInt("anzahlArbeitsplaetze")
+                    resultSet.getInt("anzahl_arbeitsplaetze")
                 );
                 raumList.add(raum);
             }
@@ -99,57 +109,77 @@ public class Dao {
 
     public void saveHardware(Hardware hardware) {
         String sql = "INSERT INTO hardware (" +
-                "typ, seriennummer, inventarnummer, hersteler, modell, status)" +
-                "VALUES (?, ?, ?, ?, ?, ?);";
+                "typ, seriennummer, inventarnummer, hersteller, modell, status)" +
+                "VALUES (?, ?, ?, ?, ?, ?)";
         try {
+            boolean isRechner = hardware instanceof Rechner;
+            preparedStatement = this.connection.prepareStatement(sql);
             preparedStatement.setString(1, hardware.getTyp());
             preparedStatement.setString(2, hardware.getSeriennummer());
             preparedStatement.setString(3, hardware.getInventarnummer());
             preparedStatement.setString(4, hardware.getHersteller());
             preparedStatement.setString(5, hardware.getModell());
             preparedStatement.setString(6, hardware.getStatus() + "");
-            preparedStatement.executeUpdate(sql);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
 
-            if (hardware instanceof Rechner) {
-                sql = "INSERT INTO rechner (imagepfad) VALUES (?)";
-                preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setString(1, ((Rechner) hardware).getImagepfad());
-                preparedStatement.executeUpdate();
+            if (isRechner) {
+                String rechnerSql = "INSERT INTO rechner (imagepfad) VALUES (?)";
+                PreparedStatement preparedStatementRechner = connection.prepareStatement(rechnerSql);
+                preparedStatementRechner.setString(1, ((Rechner) hardware).getImagepfad());
+                preparedStatementRechner.executeUpdate();
+                preparedStatementRechner.close();
 
                 sql = "SELECT MAX(h.id) AS hardwareid, MAX(r.id) AS rechnerid FROM rechner AS r, hardware AS h";
-                preparedStatement = connection.prepareStatement(sql);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                String rechnerid = resultSet.getString("rechnerid");
-                String hardwareid = resultSet.getString("hardwareid");
-
-                insertMapping(rechnerid, hardwareid, "hardware_rechner");
+                PreparedStatement preparedStatementMaxId = connection.prepareStatement(sql);
+                ResultSet resultSet = preparedStatementMaxId.executeQuery();
+                String rechnerid = "";
+                String hardwareid = "";
+                if (resultSet.next()) {
+                    rechnerid = resultSet.getString("rechnerid");
+                    hardwareid = resultSet.getString("hardwareid");
+                    insertMapping(rechnerid, hardwareid, "hardware_rechner", "rechner_id");
+                }
+                preparedStatementMaxId.close();
             }
             if (hardware instanceof Drucker) {
                 sql = "INSERT INTO drucker (betriebsmittel) VALUES (?)";
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, ((Drucker) hardware).getBetriebsmittel());
                 preparedStatement.executeUpdate();
+                preparedStatement.close();
 
                 sql = "SELECT MAX(h.id) AS hardwareid, MAX(d.id) AS druckerid FROM drucker AS d, hardware AS h";
-                preparedStatement = connection.prepareStatement(sql);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                String druckerid = resultSet.getString("rechnerid");
-                String hardwareid = resultSet.getString("hardwareid");
-
-                insertMapping(druckerid, hardwareid, "hardware_drucker");
+                PreparedStatement preparedStatementMaxId  = connection.prepareStatement(sql);
+                ResultSet resultSet = preparedStatementMaxId.executeQuery();
+                String druckerid = "";
+                String hardwareid = "";
+                if (resultSet.next()) {
+                    druckerid = resultSet.getString("druckerid");
+                    hardwareid = resultSet.getString("hardwareid");
+                    insertMapping(druckerid, hardwareid, "hardware_drucker", "drucker_id");
+                }
+                preparedStatementMaxId.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    private void insertMapping(String specificid, String hardwareid, String table) throws SQLException {
+    private void insertMapping(String specificid, String hardwareid, String table, String fieldLabel) throws SQLException {
         String sql;
-        sql = "INSERT INTO " + table + " (hardware_id, rechner_id) VALUES (?, ?)";
-        preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, hardwareid);
-        preparedStatement.setString(2, specificid);
-        preparedStatement.executeUpdate();
+        sql = "INSERT INTO " + table + " (hardware_id, " +  fieldLabel + ") VALUES (?, ?)";
+        PreparedStatement preparedStatementIds = connection.prepareStatement(sql);
+        preparedStatementIds.setString(1, hardwareid);
+        preparedStatementIds.setString(2, specificid);
+        //preparedStatement.addBatch();
+        preparedStatementIds.executeUpdate();
     }
 
     public void saveRaum(Raum raum) {
@@ -162,6 +192,12 @@ public class Dao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
