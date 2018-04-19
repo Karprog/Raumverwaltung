@@ -110,8 +110,8 @@ public class Dao {
 
     public void saveHardware(Hardware hardware) {
         String sql = "INSERT INTO hardware (" +
-                "typ, seriennummer, inventarnummer, hersteller, modell, status)" +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+                "typ, seriennummer, inventarnummer, hersteller, modell, status, raumid)" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             boolean isRechner = hardware instanceof Rechner;
             preparedStatement = this.connection.prepareStatement(sql);
@@ -121,6 +121,7 @@ public class Dao {
             preparedStatement.setString(4, hardware.getHersteller());
             preparedStatement.setString(5, hardware.getModell());
             preparedStatement.setString(6, hardware.getStatus() + "");
+            preparedStatement.setString(7, hardware.getRaumid());
             preparedStatement.executeUpdate();
             preparedStatement.close();
 
