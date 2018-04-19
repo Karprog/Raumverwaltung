@@ -10,6 +10,8 @@ public class Raum {
     private String bezeichnung;
     private String typ;
     private int anzahlArbeitsplaetze;
+
+
     private ArrayList<Hardware> hardwareliste = new ArrayList<>();
 
     public Raum(){ }
@@ -18,6 +20,13 @@ public class Raum {
                 String bezeichnung,
                 String typ,
                 int anzahlArbeitsplaetze) {
+        this.bezeichnung = bezeichnung;
+        this.typ = typ;
+        this.anzahlArbeitsplaetze = anzahlArbeitsplaetze;
+    }
+
+    public Raum(int raumid, String bezeichnung, String typ, int anzahlArbeitsplaetze) {
+        this.raumid = raumid;
         this.bezeichnung = bezeichnung;
         this.typ = typ;
         this.anzahlArbeitsplaetze = anzahlArbeitsplaetze;
@@ -35,12 +44,24 @@ public class Raum {
         return bezeichnung;
     }
 
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
+    }
+
     public String getTyp() {
         return typ;
     }
 
+    public void setTyp(String typ) {
+        this.typ = typ;
+    }
+
     public int getAnzahlArbeitsplaetze() {
         return anzahlArbeitsplaetze;
+    }
+
+    public void setAnzahlArbeitsplaetze(int anzahlArbeitsplaetze) {
+        this.anzahlArbeitsplaetze = anzahlArbeitsplaetze;
     }
 
     public ArrayList<Hardware> getHardwareliste() {
