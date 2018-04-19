@@ -97,6 +97,7 @@ public class HardwareController implements Initializable {
         hardwareList.add(rechner);
         hardwareList.add(rechner);
         raum.setHardwareliste(hardwareList);
+
         raumList.add(raum);
         raumList.add(raum);
     }
