@@ -15,7 +15,7 @@ public class Dao {
 
     private DaoManager daoManager = new DaoManager(
             "com.mysql.jdbc.Driver",
-            "jdbc:mysql://localhost/reparatur "
+            "jdbc:mysql://localhost/reparatur"
     );
     private PreparedStatement preparedStatement;
     private Connection connection = daoManager.getConnection();
@@ -68,6 +68,29 @@ public class Dao {
             }
         }
         return hardwareList;
+    }
+
+    public ArrayList getRaumList() {
+        ArrayList<Raum> raumList = new ArrayList<>();
+
+        String sql = "SELECT * FROM raum";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Raum raum = new Raum(
+                    resultSet.getInt("raumid"),
+                    resultSet.getString("bezeichnung"),
+                    resultSet.getString("typ"),
+                    resultSet.getInt("anzahlArbeitsplaetze")
+                );
+                raumList.add(raum);
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+        }
+        return raumList;
     }
 
     public void saveHardware(Hardware hardware) {
