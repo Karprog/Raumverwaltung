@@ -86,7 +86,7 @@ public class HardwareController implements Initializable {
 
     private void fillList() {
         // Werte zum testen
-        Rechner rechner = new Rechner();
+        /*Rechner rechner = new Rechner();
         rechner.setHersteller("test");
         rechner.setImagepfad("/test/test/test");
         rechner.setModell("testModell");
@@ -96,10 +96,15 @@ public class HardwareController implements Initializable {
         hardwareList.add(rechner);
         hardwareList.add(rechner);
         hardwareList.add(rechner);
-        raum.setHardwareliste(hardwareList);
+        raum.setHardwareliste(hardwareList);*/
 
+        ArrayList hardwareList = reparaturDao.getHardware();
+
+        Raum raum = new Raum();
+        raum.setRaumid(123);
         raumList.add(raum);
-        raumList.add(raum);
+        //raumList.add(raum);
+        raum.setHardwareliste(hardwareList);
     }
 
     @FXML
