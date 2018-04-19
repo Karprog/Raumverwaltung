@@ -39,14 +39,15 @@ public class Dao {
 
             while (resultSet.next()) {
                     Rechner rechner = new Rechner(
+                            resultSet.getInt("id"),
                             resultSet.getString("typ"),
                             resultSet.getString("seriennummer"),
                             resultSet.getString("inventarnummer"),
                             resultSet.getString("hersteller"),
                             resultSet.getString("modell"),
                             resultSet.getInt("status"),
-                            resultSet.getString("Imagepfad/Betriebsmittel"),
-                            resultSet.getString("raumid")
+                            resultSet.getString("raumid"),
+                            resultSet.getString("Imagepfad/Betriebsmittel")
                     );
                     hardwareList.add(rechner);
             }
@@ -62,14 +63,15 @@ public class Dao {
 
             while (resultSet.next()) {
                     Drucker drucker = new Drucker(
+                            resultSet.getInt("id"),
                             resultSet.getString("typ"),
                             resultSet.getString("seriennummer"),
                             resultSet.getString("inventarnummer"),
                             resultSet.getString("hersteller"),
                             resultSet.getString("modell"),
                             resultSet.getInt("status"),
-                            resultSet.getString("Imagepfad/Betriebsmittel"),
-                            resultSet.getString("raumid")
+                            resultSet.getString("raumid"),
+                            resultSet.getString("Imagepfad/Betriebsmittel")
                     );
                     hardwareList.add(drucker);
             }
