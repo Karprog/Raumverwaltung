@@ -35,7 +35,8 @@ public class RaumController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        listView.setItems(raumList);
+        listView.refresh();
     }
 
     private Raum getRaumDataFromView(){
@@ -55,18 +56,12 @@ public class RaumController implements Initializable {
 
     }
 
-    private void writeDataToView(){
-        /*txtHardwareId.setText();
-        txtHersteller.setText();
-        txtModell.setText();
-        txtSeriennummer.setText();
-        txtInventarnummer.setText();
-        txtType.setText();
-        txtStatus.setText();
-        txtImagepfad.setText();
-        txtBetriebsmittel.setText();*/
+    private void writeDataToList(Raum raum){
+        raumList.add(raum);
+        listView.refresh();
     }
 
+    @FXML
     void handleBtnSaveAction(ActionEvent e) {
         String bezeichnung = txtBezeichnung.getText();
         String typ = txtTyp.getText();
@@ -74,11 +69,12 @@ public class RaumController implements Initializable {
 
         Raum raum = new Raum(bezeichnung, typ, anzahlArbeitsplaetze);
         dao.saveRaum(raum);
+
+        writeDataToList(raum);
     }
 
     @FXML
     private void closeWindow(){
         System.exit(0);
-        System.out.println(getRaumDataFromView());
     }
 }
