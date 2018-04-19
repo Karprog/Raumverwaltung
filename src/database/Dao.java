@@ -97,7 +97,7 @@ public class Dao {
                     resultSet.getInt("raumid"),
                     resultSet.getString("bezeichnung"),
                     resultSet.getString("typ"),
-                    resultSet.getInt("anzahlArbeitsplaetze")
+                    resultSet.getInt("anzahl_arbeitsplaetze")
                 );
                 raumList.add(raum);
             }
