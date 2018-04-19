@@ -14,11 +14,15 @@ import java.util.ArrayList;
 public class Dao {
 
     private DaoManager daoManager = new DaoManager(
-            "com.mysql.jdbc.driver",
-            "jdbc:mysql://localhost/reparatur "
+            "com.mysql.jdbc.Driver",
+            "jdbc:mysql://127.0.0.1:3306/reparatur"
     );
     private PreparedStatement preparedStatement;
-    private Connection connection = daoManager.getConnection();
+    private Connection connection = null;
+
+    public Dao () {
+        this.connection = daoManager.getConnection();
+    }
 
     public ArrayList getHardware() {
         ArrayList<Hardware> hardwareList = new ArrayList<>();
@@ -68,6 +72,29 @@ public class Dao {
             }
         }
         return hardwareList;
+    }
+
+    public ArrayList getRaumList() {
+        ArrayList<Raum> raumList = new ArrayList<>();
+
+        String sql = "SELECT * FROM raum";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Raum raum = new Raum(
+                    resultSet.getInt("raumid"),
+                    resultSet.getString("bezeichnung"),
+                    resultSet.getString("typ"),
+                    resultSet.getInt("anzahlArbeitsplaetze")
+                );
+                raumList.add(raum);
+            }
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+        }
+        return raumList;
     }
 
     public void saveHardware(Hardware hardware) {
@@ -128,7 +155,7 @@ public class Dao {
     public void saveRaum(Raum raum) {
         String sql = "INSERT INTO raum (bezeichnung, typ, anzahl_arbeitsplaetze) VALUES (?, ?, ?);";
         try {
-            connection.prepareStatement(sql);
+            preparedStatement = this.connection.prepareStatement(sql);
             preparedStatement.setString(1, raum.getBezeichnung());
             preparedStatement.setString(2, raum.getTyp());
             preparedStatement.setString(3, raum.getAnzahlArbeitsplaetze() + "");
