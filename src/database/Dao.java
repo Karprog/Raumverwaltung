@@ -15,10 +15,14 @@ public class Dao {
 
     private DaoManager daoManager = new DaoManager(
             "com.mysql.jdbc.Driver",
-            "jdbc:mysql://localhost/reparatur"
+            "jdbc:mysql://127.0.0.1:3306/reparatur"
     );
     private PreparedStatement preparedStatement;
-    private Connection connection = daoManager.getConnection();
+    private Connection connection = null;
+
+    public Dao () {
+        this.connection = daoManager.getConnection();
+    }
 
     public ArrayList getHardware() {
         ArrayList<Hardware> hardwareList = new ArrayList<>();
@@ -108,7 +112,7 @@ public class Dao {
 
             if (hardware instanceof Rechner) {
                 sql = "INSERT INTO rechner (imagepfad) VALUES (?)";
-                connection.prepareStatement(sql);
+                preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, ((Rechner) hardware).getImagepfad());
                 preparedStatement.executeUpdate();
 
@@ -151,7 +155,7 @@ public class Dao {
     public void saveRaum(Raum raum) {
         String sql = "INSERT INTO raum (bezeichnung, typ, anzahl_arbeitsplaetze) VALUES (?, ?, ?);";
         try {
-            connection.prepareStatement(sql);
+            preparedStatement = this.connection.prepareStatement(sql);
             preparedStatement.setString(1, raum.getBezeichnung());
             preparedStatement.setString(2, raum.getTyp());
             preparedStatement.setString(3, raum.getAnzahlArbeitsplaetze() + "");
