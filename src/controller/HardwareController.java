@@ -1,4 +1,3 @@
-
 package controller;
 
 import database.Dao;
@@ -18,11 +17,10 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class HardwareController implements Initializable {
-    @FXML
-    public Button btnHinzufuegen;
     @FXML
     private ListView<Raum> listView;
     @FXML
@@ -51,27 +49,37 @@ public class HardwareController implements Initializable {
     private RadioButton rbRechner;
 
     private ObservableList<Raum> raumList = FXCollections.observableArrayList();
+    private List<Hardware> hardwareList = new ArrayList<>();
     private Dao reparaturDao = new Dao();
     private boolean isRechner = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Einträge werden bei der Initialisierung aus der Datenbank geholt und in die Liste geschrieben
-        fillList();
-
+        readRaumFromDb();
+        readHardwareFromDB();
+        mapHardwareToRaum();
         toggleRadiobuttonHardware();
 
         listView.setItems(raumList);
         listView.refresh();
     }
 
-    @FXML
-    private void writeToDb(){
-        //   System.out.println(getDataFromView());
+    private void readRaumFromDb(){
+        raumList.addAll(reparaturDao.getRaumList());
     }
 
-    private void readFromDb(){
+    private void readHardwareFromDB() {
+        hardwareList.addAll(reparaturDao.getHardware());
+    }
 
+    private void mapHardwareToRaum() {
+        for ( Hardware hardware : hardwareList) {
+            for ( Raum raum : raumList) {
+                if( hardware.getRaumid().equals(raum.getRaumid())) {
+                    raum.getHardwareliste().add(hardware);
+                }
+            }
+        }
     }
 
     private void writeDataToList(int raumId, Hardware hardware){
@@ -82,23 +90,6 @@ public class HardwareController implements Initializable {
         }
 
         listView.refresh();
-    }
-
-    private void fillList() {
-        // Werte zum testen
-        Rechner rechner = new Rechner();
-        rechner.setHersteller("test");
-        rechner.setImagepfad("/test/test/test");
-        rechner.setModell("testModell");
-        Raum raum = new Raum();
-        raum.setRaumid(123);
-        ArrayList<Hardware> hardwareList = new ArrayList<>();
-        hardwareList.add(rechner);
-        hardwareList.add(rechner);
-        hardwareList.add(rechner);
-        raum.setHardwareliste(hardwareList);
-        raumList.add(raum);
-        raumList.add(raum);
     }
 
     @FXML

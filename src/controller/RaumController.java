@@ -47,6 +47,10 @@ public class RaumController implements Initializable {
         return raum;
     }
 
+    private void readRaumFromDb(){
+        raumList.addAll(dao.getRaumList());
+    }
+
     @FXML
     private void writeToDb(){
         //   System.out.println(getDataFromView());
