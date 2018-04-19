@@ -112,7 +112,7 @@ public class Dao {
 
             if (hardware instanceof Rechner) {
                 sql = "INSERT INTO rechner (imagepfad) VALUES (?)";
-                connection.prepareStatement(sql);
+                preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setString(1, ((Rechner) hardware).getImagepfad());
                 preparedStatement.executeUpdate();
 
