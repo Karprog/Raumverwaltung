@@ -26,9 +26,19 @@ public class Dao {
 
     public ArrayList getHardware() {
         ArrayList<Hardware> hardwareList = new ArrayList<>();
-        String sql = "SELECT * FROM hardware AS h INNER JOIN hardware_rechner AS hr ON h.id = hr.hardware_id" +
-                " UNION ALL " +
-                "SELECT * FROM hardware AS h INNER JOIN hardware_drucker AS hd ON h.id = hr.hardware_id;";
+        String sql = "SELECT h.*, r.imagepfad " +
+                "FROM hardware AS h " +
+                "INNER JOIN hardware_rechner AS hr " +
+                "ON h.id = hr.hardware_id " +
+                "INNER JOIN rechner AS r " +
+                "ON hr.rechner_id = r.id " +
+                " UNION " +
+                "SELECT h.*, d.betriebsmittel " +
+                "FROM hardware AS h " +
+                "INNER JOIN hardware_drucker AS hd " +
+                "ON h.id = hd.hardware_id " +
+                "INNER JOIN drucker AS d " +
+                "ON hd.drucker_id = d.id";
 
         try {
             preparedStatement = connection.prepareStatement(sql);
