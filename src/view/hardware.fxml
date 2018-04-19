@@ -44,7 +44,7 @@
       <Label text="Betriebsmittel" GridPane.rowIndex="9" />
       <Label text="Status" GridPane.rowIndex="10" />
       <TextField fx:id="txtStatus" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-          <Button fx:id="btnHinzufuegen" mnemonicParsing="false" onAction="#writeToDb" text="Neu" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+          <Button fx:id="btnHinzufuegen" mnemonicParsing="false" onAction="#handleBtnSaveAction" text="Neu" GridPane.columnIndex="1" GridPane.rowIndex="11" />
     </children>
     <columnConstraints>
         <ColumnConstraints />

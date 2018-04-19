@@ -88,6 +88,14 @@ public class Hardware {
         this.status = status;
     }
 
+    public String getRaumid() {
+        return raumid;
+    }
+
+    public void setRaumid(String raumid) {
+        this.raumid = raumid;
+    }
+
     @Override
     public String toString() {
         return "\n" +
