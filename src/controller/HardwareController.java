@@ -1,7 +1,9 @@
+
 package controller;
 
 import database.Dao;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import model.Drucker;
 import model.Hardware;
 import model.Raum;
@@ -19,6 +21,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class HardwareController implements Initializable {
+    @FXML
+    public Button btnHinzufuegen;
     @FXML
     private ListView<Raum> listView;
     @FXML
@@ -63,7 +67,7 @@ public class HardwareController implements Initializable {
 
     @FXML
     private void writeToDb(){
-     //   System.out.println(getDataFromView());
+        //   System.out.println(getDataFromView());
     }
 
     private void readFromDb(){
@@ -119,11 +123,11 @@ public class HardwareController implements Initializable {
         String hersteller = txtHersteller.getText();
         String modell = txtModell.getText();
         int status = Integer.parseInt(txtStatus.getText());
-        String rechnerInstance = rbRechner.getText();
-        String druckerInstance = rbDrucker.getText();
+        boolean rechnerInstance = rbRechner.isSelected();
+        boolean druckerInstance = rbDrucker.isSelected();
         String raumid = txtRaumId.getText();
 
-        if (!"".equals(rechnerInstance)) {
+        if (rechnerInstance) {
             String imagepfad = txtImagepfad.getText();
             Rechner rechner = new Rechner(typ, seriennummer, inventarnummer,
                     hersteller, modell, status, imagepfad, raumid);
@@ -131,7 +135,7 @@ public class HardwareController implements Initializable {
 
             writeDataToList(Integer.parseInt(raumid), rechner);
         }
-        if (!"".equals(druckerInstance)) {
+        if (druckerInstance) {
             String betriebsmittel = txtBetriebsmittel.getText();
             Drucker drucker = new Drucker(typ, seriennummer, inventarnummer, hersteller, modell, status,
                     betriebsmittel, raumid);
