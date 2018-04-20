@@ -12,5 +12,20 @@ Für die Frontendausgabe benutzen wir FXML.
 ### Das Ziel
 Mit dem erstellten Projekt kann man Rechner und Drucker Räumen zuordnen.\
 Auf einer grafischen Oberfläche lassen sich neue Hardware und Räume erstellen.
-Diese kann man dann nach belieben verknüpfen.\
-Zudem sieht man die bisherigen Räume udn Hardware und deren Zuordnung.
+Diese kann man dann nach belieben mit Geräten verknüpfen.\
+Zudem sieht man die bisherigen Räume und Hardware,sowie deren Zuordnungen.
+
+### Funktionalität
+- Raum anlegen
+- Drucker anlegen
+- Einträge in DB speichern
+- Anzeigen vorhandener Elemente aus Datenbank auslesen
+
+### Sich in Umsetzung befindende Funktionen
+- Validierung
+- Hibernate
+
+### In Planung - nicht umgesetzt
+- Suche
+- Editieren von Einträgen
+- Löschen von EInträgen
