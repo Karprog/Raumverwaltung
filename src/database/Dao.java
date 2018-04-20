@@ -26,51 +26,54 @@ public class Dao {
 
     public ArrayList getHardware() {
         ArrayList<Hardware> hardwareList = new ArrayList<>();
-        String sql = "SELECT h.*, r.imagepfad " +
+        String sql = "SELECT h.*, r.imagepfad AS `Imagepfad/Betriebsmittel` " +
                 "FROM hardware AS h " +
                 "INNER JOIN hardware_rechner AS hr " +
                 "ON h.id = hr.hardware_id " +
                 "INNER JOIN rechner AS r " +
-                "ON hr.rechner_id = r.id " +
-                " UNION " +
-                "SELECT h.*, d.betriebsmittel " +
-                "FROM hardware AS h " +
-                "INNER JOIN hardware_drucker AS hd " +
-                "ON h.id = hd.hardware_id " +
-                "INNER JOIN drucker AS d " +
-                "ON hd.drucker_id = d.id";
+                "ON hr.rechner_id = r.id";
 
         try {
             preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                if ("Rechner".equals(resultSet.getString("typ"))) {
                     Rechner rechner = new Rechner(
+                            resultSet.getInt("id"),
                             resultSet.getString("typ"),
                             resultSet.getString("seriennummer"),
                             resultSet.getString("inventarnummer"),
                             resultSet.getString("hersteller"),
                             resultSet.getString("modell"),
                             resultSet.getInt("status"),
-                            resultSet.getString("imagepfad"),
-                            resultSet.getString("raumid")
+                            resultSet.getString("raumid"),
+                            resultSet.getString("Imagepfad/Betriebsmittel")
                     );
                     hardwareList.add(rechner);
-                }
-                if ("Drucker".equals(resultSet.getString("typ"))) {
+            }
+
+            sql = "SELECT h.*, d.betriebsmittel AS `Imagepfad/Betriebsmittel` " +
+                    "FROM hardware AS h " +
+                    "INNER JOIN hardware_drucker AS hd " +
+                    "ON h.id = hd.hardware_id " +
+                    "INNER JOIN drucker AS d " +
+                    "ON hd.drucker_id = d.id";
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
                     Drucker drucker = new Drucker(
+                            resultSet.getInt("id"),
                             resultSet.getString("typ"),
                             resultSet.getString("seriennummer"),
                             resultSet.getString("inventarnummer"),
                             resultSet.getString("hersteller"),
                             resultSet.getString("modell"),
                             resultSet.getInt("status"),
-                            resultSet.getString("betriebsmittel"),
-                            resultSet.getString("raumid")
+                            resultSet.getString("raumid"),
+                            resultSet.getString("Imagepfad/Betriebsmittel")
                     );
                     hardwareList.add(drucker);
-                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
