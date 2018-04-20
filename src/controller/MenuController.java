@@ -34,7 +34,7 @@ public class MenuController implements Initializable {
     private void startHardwareAnlegen() throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/view/hardware.fxml"));
         Stage stage = new Stage();
-        stage.setScene(new Scene(root, 350, 600));
+        stage.setScene(new Scene(root, 400, 600));
         stage.show();
     }
 }
