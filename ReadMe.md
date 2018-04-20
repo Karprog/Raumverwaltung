@@ -24,3 +24,8 @@ Zudem sieht man die bisherigen Räume und Hardware,sowie deren Zuordnungen.
 ### Sich in Umsetzung befindende Funktionen
 - Validierung
 - Hibernate
+
+### In Planung - nicht umgesetzt
+- Suche
+- Editieren von Einträgen
+- Löschen von EInträgen
