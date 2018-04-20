@@ -83,6 +83,17 @@ public class HardwareController implements Initializable {
         }
     }
 
+    private void refreshList(){
+        raumList.clear();
+        hardwareList.clear();
+
+        readRaumFromDb();
+        readHardwareFromDB();
+        mapHardwareToRaum();
+
+        listView.refresh();
+    }
+
     private void writeDataToList(int raumId, Hardware hardware){
         for(Raum raum : raumList){
             if(raum.getRaumid() == raumId){
@@ -125,7 +136,7 @@ public class HardwareController implements Initializable {
                     hersteller, modell, status, imagepfad, raumid);
             reparaturDao.saveHardware(rechner);
 
-            writeDataToList(Integer.parseInt(raumid), rechner);
+            refreshList();
         }
         if (druckerInstance) {
             String betriebsmittel = txtBetriebsmittel.getText();
@@ -133,9 +144,32 @@ public class HardwareController implements Initializable {
                     betriebsmittel, raumid);
             reparaturDao.saveHardware(drucker);
 
-            writeDataToList(Integer.parseInt(raumid), drucker);
+            refreshList();
         }
     }
+
+    /*void handleEditHardwareAction (ActionEvent e) {
+
+        if (rbRechner.isSelected()) {
+            Rechner rechner = null;
+            //Wenn Eintrag noch nicht existiert, lege neues Hardwareelement an
+            if ("".equals(txtHardwareId)) {
+                rechner = new Rechner();
+                handleBtnSaveAction(e);
+            } else {
+                //Wenn Eintrag schon vorhanden, ändere bestehenden Eintrag
+                rechner = (Rechner) hardwareList.get(listView.getSelectionModel().getSelectedIndex());
+                rechner.setId(Integer.parseInt(txtHardwareId.getText()));
+                rechner.setTyp(txtTyp.getText());
+                rechner.setHersteller(txtHersteller.getText());
+                rechner.setInventarnummer(txtInventarnummer.getText());
+                rechner.setSeriennummer(txtSeriennummer.getText());
+                rechner.setModell(txtModell.getText());
+                rechner.setImagepfad(txtImagepfad.getText());
+                rechner.setStatus(Integer.parseInt(txtStatus.getText()));
+            }
+        }
+    }*/
 
     @FXML
     private void closeWindow(){
