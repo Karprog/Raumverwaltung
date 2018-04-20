@@ -30,6 +30,17 @@ public class Hardware {
         this.raumid = raumid;
     }
 
+    public Hardware(int id, String typ, String seriennummer, String inventarnummer, String hersteller, String modell, int status, String raumid) {
+        this.id = id;
+        this.typ = typ;
+        this.seriennummer = seriennummer;
+        this.inventarnummer = inventarnummer;
+        this.hersteller = hersteller;
+        this.modell = modell;
+        this.status = status;
+        this.raumid = raumid;
+    }
+
     public Hardware() {};
 
     public int getId() {
@@ -88,12 +99,14 @@ public class Hardware {
         this.status = status;
     }
 
-    public String getRaumid() {
-        return raumid;
-    }
 
     public void setRaumid(String raumid) {
         this.raumid = raumid;
+    }
+
+    public String getRaumid() {
+        return this.raumid;
+
     }
 
     @Override

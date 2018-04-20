@@ -21,6 +21,12 @@ public class Rechner extends Hardware {
         this.imagepfad = imagepfad;
     }
 
+    public Rechner(int id, String typ, String seriennummer, String inventarnummer, String hersteller, String modell,
+                   int status, String raumid, String imagepfad) {
+        super(id, typ, seriennummer, inventarnummer, hersteller, modell, status, raumid);
+        this.imagepfad = imagepfad;
+    }
+
     public String getImagepfad() {
         return this.imagepfad;
     }

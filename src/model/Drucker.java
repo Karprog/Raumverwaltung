@@ -21,6 +21,12 @@ public class Drucker extends Hardware {
         this.betriebsmittel = betriebsmittel;
     }
 
+    public Drucker(int id, String typ, String seriennummer, String inventarnummer, String hersteller, String modell,
+                   int status, String raumid, String betriebsmittel) {
+        super(id, typ, seriennummer, inventarnummer, hersteller, modell, status, raumid);
+        this.betriebsmittel = betriebsmittel;
+    }
+
     public String getBetriebsmittel() {
         return this.betriebsmittel;
     }
