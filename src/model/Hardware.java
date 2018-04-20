@@ -99,12 +99,14 @@ public class Hardware {
         this.status = status;
     }
 
+
     public void setRaumid(String raumid) {
         this.raumid = raumid;
     }
 
     public String getRaumid() {
         return this.raumid;
+
     }
 
     @Override

@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS hardware (
     id INT PRIMARY KEY AUTO_INCREMENT,
     typ VARCHAR(200),
     seriennummer VARCHAR(200),
-    invantarnummer VARCHAR(200),
+    inventarnummer VARCHAR(200),
     hersteller VARCHAR(200),
     modell VARCHAR(200),
     status INT,

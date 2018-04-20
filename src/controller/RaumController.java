@@ -35,6 +35,7 @@ public class RaumController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        readRaumFromDb();
         listView.setItems(raumList);
         listView.refresh();
     }
@@ -47,9 +48,8 @@ public class RaumController implements Initializable {
         return raum;
     }
 
-    @FXML
-    private void writeToDb(){
-        //   System.out.println(getDataFromView());
+    private void readRaumFromDb(){
+        raumList.addAll(dao.getRaumList());
     }
 
     private void readFromDb(){
