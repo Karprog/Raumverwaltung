@@ -2,7 +2,11 @@ package controller;
 
 import database.Dao;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 import model.Drucker;
 import model.Hardware;
 import model.Raum;
@@ -15,6 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,32 +124,39 @@ public class HardwareController implements Initializable {
     }
 
     @FXML
-    void handleBtnSaveAction(ActionEvent e) {
-        String typ = txtTyp.getText();
-        String seriennummer = txtSeriennummer.getText();
-        String inventarnummer = txtInventarnummer.getText();
-        String hersteller = txtHersteller.getText();
-        String modell = txtModell.getText();
-        int status = Integer.parseInt(txtStatus.getText());
-        boolean rechnerInstance = rbRechner.isSelected();
-        boolean druckerInstance = rbDrucker.isSelected();
-        String raumid = txtRaumId.getText();
+    void handleBtnSaveAction(ActionEvent e) throws IOException {
+        try {
+            String typ = txtTyp.getText();
+            String seriennummer = txtSeriennummer.getText();
+            String inventarnummer = txtInventarnummer.getText();
+            String hersteller = txtHersteller.getText();
+            String modell = txtModell.getText();
+            int status = Integer.parseInt(txtStatus.getText());
+            boolean rechnerInstance = rbRechner.isSelected();
+            boolean druckerInstance = rbDrucker.isSelected();
+            String raumid = txtRaumId.getText();
 
-        if (rechnerInstance) {
-            String imagepfad = txtImagepfad.getText();
-            Rechner rechner = new Rechner(typ, seriennummer, inventarnummer,
-                    hersteller, modell, status, imagepfad, raumid);
-            reparaturDao.saveHardware(rechner);
+            if (rechnerInstance) {
+                String imagepfad = txtImagepfad.getText();
+                Rechner rechner = new Rechner(typ, seriennummer, inventarnummer,
+                        hersteller, modell, status, imagepfad, raumid);
+                reparaturDao.saveHardware(rechner);
 
-            refreshList();
-        }
-        if (druckerInstance) {
-            String betriebsmittel = txtBetriebsmittel.getText();
-            Drucker drucker = new Drucker(typ, seriennummer, inventarnummer, hersteller, modell, status,
-                    betriebsmittel, raumid);
-            reparaturDao.saveHardware(drucker);
+                refreshList();
+            }
+            if (druckerInstance) {
+                String betriebsmittel = txtBetriebsmittel.getText();
+                Drucker drucker = new Drucker(typ, seriennummer, inventarnummer, hersteller, modell, status,
+                        betriebsmittel, raumid);
+                reparaturDao.saveHardware(drucker);
 
-            refreshList();
+                refreshList();
+            }
+        } catch (NumberFormatException el) {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/error.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, 353, 200));
+            stage.show();
         }
     }
 
