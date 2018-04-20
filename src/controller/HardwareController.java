@@ -83,6 +83,17 @@ public class HardwareController implements Initializable {
         }
     }
 
+    private void refreshList(){
+        raumList.clear();
+        hardwareList.clear();
+
+        readRaumFromDb();
+        readHardwareFromDB();
+        mapHardwareToRaum();
+
+        listView.refresh();
+    }
+
     private void writeDataToList(int raumId, Hardware hardware){
         for(Raum raum : raumList){
             if(raum.getRaumid() == raumId){
@@ -125,7 +136,7 @@ public class HardwareController implements Initializable {
                     hersteller, modell, status, imagepfad, raumid);
             reparaturDao.saveHardware(rechner);
 
-            writeDataToList(Integer.parseInt(raumid), rechner);
+            refreshList();
         }
         if (druckerInstance) {
             String betriebsmittel = txtBetriebsmittel.getText();
@@ -133,7 +144,7 @@ public class HardwareController implements Initializable {
                     betriebsmittel, raumid);
             reparaturDao.saveHardware(drucker);
 
-            writeDataToList(Integer.parseInt(raumid), drucker);
+            refreshList();
         }
     }
 
